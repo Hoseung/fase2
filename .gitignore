@@ -15,3 +15,8 @@ build/*
 *.map
 *.vscode
 *key.txt
+__pycache__
+*/build/*
+fase/bind/palisade
+*.d
+third_party/*/*
