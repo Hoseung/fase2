@@ -109,6 +109,7 @@ class HEAANContext():
                 self.loadLKey(self._lkey)
             if rot_r:
                 self.loadRKey(self._rkey)
+            print("KEY LOADING COMPLETE")
 
         self.algo = he.SchemeAlgo(self._scheme)
         print("HEAAN CKKS setup is ready ")

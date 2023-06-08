@@ -74,7 +74,10 @@ void Scheme::loadEncKey() {
 		Key* key = new Key(); // Should I delete it before closing the program?
 		SerializationUtils::readKey(key, path);
 		keyMap.insert(pair<long, Key*>(ENCRYPTION, key));
+        cout << "loading ENC key from:  " << path << endl;	
+        cout << "loading ENC key done." << endl;	
 	}
+    // cout << "Didn't load ENC key." << endl;	
 }	
 
 void Scheme::loadMultKey() {
@@ -83,7 +86,9 @@ void Scheme::loadMultKey() {
 		string path = RootPath + MulKeyName;
 		SerializationUtils::readKey(key, path);
 		keyMap.insert(pair<long, Key*>(MULTIPLICATION, key));
+	    cout << "loading MUL key done." << endl;	
 	}
+    // cout << "Didn't load MUL key." << endl;	
 }
 
 void Scheme::loadConjKey() {
@@ -92,7 +97,9 @@ void Scheme::loadConjKey() {
 		string path = RootPath + ConjKeyName;
 		SerializationUtils::readKey(key, path);
 		keyMap.insert(pair<long, Key*>(CONJUGATION, key));
+	    cout << "loading CONJ key done." << endl;	
 	}
+    // cout << "Didn't load CONJ key." << endl;	
 }
 
 void Scheme::loadLeftRotKey(long r) {
@@ -102,7 +109,9 @@ void Scheme::loadLeftRotKey(long r) {
 		string path = RootPath + "RotKey_" + to_string(r) + ".txt";
 		SerializationUtils::readKey(key, path);
 		leftRotKeyMap.insert(pair<long, Key*>(r, key));
+	    cout << "loading ROT key done." << endl;	
 	}
+    // cout << "Didn't load ROT key." << endl;	
 }
 
 
