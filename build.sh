@@ -7,6 +7,10 @@ build_palisade=false
 export ROOT_DIR=$PWD
 export CGBN_INCLUDE_DIR=$ROOT_DIR/third_party/CGBN/include
 
+rm build/* -rf
+rm fase/HEAAN.cpython*.so
+
+
 cd $ROOT_DIR/fase/HEAAN/lib/
 make clean && make  -j 4
 
@@ -22,7 +26,7 @@ fi
 
 if [ "$build_seal" = true ] ; then
     cd $ROOT_DIR/fase/SEAL
-    rm build/* -rf
+    
     cmake -S . -B build -DSEAL_USE_MSGSL=OFF -DSEAL_USE_ZLIB=OFF -DSEAL_USE_ZSTD=OFF
     cmake --build build -j 4
 fi

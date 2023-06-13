@@ -27,7 +27,7 @@ public:
 
 	static void writeKey(Key* key, string path);
 	//static Key readKey(string path);
-	static void readKey(Key* key, string path);
+	static int readKey(Key* key, string path);
 };
 
 #endif /* SERIALIZATIONUTILS_H_ */

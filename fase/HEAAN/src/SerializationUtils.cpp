@@ -65,11 +65,16 @@ void SerializationUtils::writeKey(Key* key, string path) {
 	fout.close();
 }
 
-void SerializationUtils::readKey(Key* key, string path) {
+int SerializationUtils::readKey(Key* key, string path) {
 	fstream fin;
 	fin.open(path, ios::binary|ios::in);
+    if (!fin) {
+        std::cerr << "An error occurred while opening the file.\n";
+        return 1;
+    }
     fin.read(reinterpret_cast<char*>(key->rax), Nnprimes*sizeof(uint64_t));
 	fin.read(reinterpret_cast<char*>(key->rbx), Nnprimes*sizeof(uint64_t));
 	fin.close();
+    return 0;
 }
 
