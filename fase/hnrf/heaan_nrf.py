@@ -56,9 +56,8 @@ class HETreeEvaluator:
                  activation_coeffs: List[float], 
                  sk=None,
                  #polynomial_evaluator: Callable,
-                 
                  #relin_keys: seal.RelinKeys, galois_keys: seal.GaloisKeys, scale: float,
-                 do_reduction=True,
+                 do_reduction=False,
                  silent=False):
         """Initializes with the weights used during computation.
 
@@ -154,6 +153,7 @@ class HETreeEvaluator:
         #output = self.commonAlgo.function_poly(ctx, 
         #               he.Double(self._activation_coeff))
         output = he.Ciphertext()
+        print("ACTIVATION")
         self.algo.function_poly(output, 
                     ctx, 
                     he.Double(self._activation_coeff), 
@@ -164,11 +164,12 @@ class HETreeEvaluator:
 
     def __call__(self, ctx):
         # First we add the first bias to do the comparisons
+        print("RUNNING HNRF")
         ctx = self.compare(ctx)
-        #print("After compare")
+        print("After compare")
         #self.decrypt_print(ctx)
         ctx = self.match(ctx)
-        #print("after match")
+        print("after match")
         #self.decrypt_print(ctx)
         outputs = self.decide(ctx)
         if self.do_reduction:
@@ -252,7 +253,7 @@ class HETreeEvaluator:
         """
         output = self._mat_mult(self.w1, ctx)
 
-        #print(f"MATCH:: 'output.logq', {output.logq} == {self.b1_ctx.logq}?")
+        print(f"MATCH:: 'output.logq', {output.logq} == {self.b1_ctx.logq}?")
         self.scheme.addAndEqual(output, self.b1_ctx)
         
         output = self.activation(output)
