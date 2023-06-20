@@ -28,11 +28,11 @@ GMP 6.2.1 worked fine for us.
 cd gmp-6.2.1
 ./configure SHARED=on 
 make
-make check  # GMP deveolopers strongly recommned do this
+make check  # GMP developers strongly recommend doing this
 (sudo) make install 
 ```
 
-If you encounter *version number mismatch* error message like:
+If you encounter a *version number mismatch* error message like:
 
 > GMP version check (6.2.1/6.2.0)  
 > *** version number mismatch: inconsistency between gmp.h and libgmp
