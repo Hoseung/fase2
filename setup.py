@@ -1,7 +1,6 @@
 import os
-from setuptools import setup#, find_packages
+from setuptools import setup
 from distutils.sysconfig import get_python_inc
-#import pathlib
 
 # python include dir
 py_include_dir = os.path.join(get_python_inc())
@@ -12,7 +11,6 @@ from pybind11.setup_helpers import Pybind11Extension, build_ext
 
 build_fpga=False
 build_cuda=False
-build_seal=False
 
 cwd = os.getcwd()
 __version__ = "1.01"
@@ -65,19 +63,6 @@ if build_cuda:
         define_macros = [('VERSION_INFO', __version__)],
         package_dir = {'': 'fase/'},
         )
-    )
-if build_seal:
-    ext_modules1.append(
-        Pybind11Extension("seal",
-       ["fase/bind/base64.cpp", "fase/bind/seal_wrapper.cpp"],
-       # Example: passing in the version to the compiled code
-       include_dirs=[py_include_dir, 'pybind11/include', 'fase/SEAL/native/src', 'fase/SEAL/build/native/src'],
-       language='c++',
-       extra_compile_args=['-std=c++17'],
-       extra_objects=['fase/SEAL/build/lib/libseal-3.7.a'],
-       define_macros = [('VERSION_INFO', __version__)],
-       package_dir = {'': 'fase/'},
-       )
     )
 
 setup(
