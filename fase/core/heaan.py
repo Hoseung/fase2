@@ -2,8 +2,9 @@
 import numpy as np
 # from torch import split_with_sizes
 #from fase.core.heaan import he
-from fase.heaan_loader import load
-he = load()
+#from fase.heaan_loader import load
+#he = load()
+import fase.HEAAN as he
 
 class HEAANContext():
     def __init__(self, 

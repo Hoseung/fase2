@@ -10,10 +10,6 @@ py_include_dir = os.path.join(get_python_inc())
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 #from pybind11 import get_cmake_dir
 
-build_fpga=False
-build_cuda=False
-build_seal=False
-
 cwd = os.getcwd()
 __version__ = "1.01"
 
@@ -31,54 +27,6 @@ ext_modules1 = [
         define_macros = [('VERSION_INFO', __version__)],
         package_dir = {'': 'fase/'},
         )]
-if build_fpga:
-    ext_modules1.append(
-        Pybind11Extension("HEAAN_fpga",
-        ["fase/bind/base64.cpp", "fase/bind/heaan_wrapper_fpga.cpp"],
-        # Example: passing in the version to the compiled code
-        include_dirs=[py_include_dir,
-         'pybind11/include',
-          '/usr/local/include',
-           'fase/HEAAN_fpga/src', 'fase/HEAAN_fpga/src_fpga'],
-        language='c++',
-        extra_compile_args=['-std=c++17'],
-        extra_objects=['/usr/local/lib/libntl.so', 'fase/HEAAN_fpga/lib/libHEAAN.a'],
-        define_macros = [('VERSION_INFO', __version__)],
-        package_dir = {'': 'fase/'},
-        )
-    )
-if build_cuda:
-    ext_modules1.append(
-        Pybind11Extension("HEAAN_cuda",
-        ["fase/bind/base64.cpp", "fase/bind/heaan_wrapper_cuda.cpp"],
-        # Example: passing in the version to the compiled code
-        include_dirs=[py_include_dir,
-         'pybind11/include',
-          '/usr/local/include',
-           'fase/HEAAN_cuda/src'],
-        language='c++',
-        extra_compile_args=['-std=c++17'],
-        extra_objects=['/usr/local/lib/libntl.so', 
-                       cwd+'/fase/HEAAN_cuda/lib/libHEAAN.so'],
-        runtime_library_dirs=[cwd+'/fase/HEAAN_cuda/lib/'], # search director for external shared library
-        libraries=['/usr/local/cuda/lib64'],
-        define_macros = [('VERSION_INFO', __version__)],
-        package_dir = {'': 'fase/'},
-        )
-    )
-if build_seal:
-    ext_modules1.append(
-        Pybind11Extension("seal",
-       ["fase/bind/base64.cpp", "fase/bind/seal_wrapper.cpp"],
-       # Example: passing in the version to the compiled code
-       include_dirs=[py_include_dir, 'pybind11/include', 'fase/SEAL/native/src', 'fase/SEAL/build/native/src'],
-       language='c++',
-       extra_compile_args=['-std=c++17'],
-       extra_objects=['fase/SEAL/build/lib/libseal-3.7.a'],
-       define_macros = [('VERSION_INFO', __version__)],
-       package_dir = {'': 'fase/'},
-       )
-    )
 
 setup(
     name="fase",
