@@ -1,6 +1,6 @@
 # from cv2 import split
 import numpy as np
-# from torch import split_with_sizes
+import os 
 #from fase.core.heaan import he
 from fase.heaan_loader import load
 he = load()
@@ -70,6 +70,10 @@ class HEAANContext():
         self.ring = he.Ring()
         if self._is_owner:
             print("Initializing the scheme as the data owner", flush=True)
+            if (not os.path.exists(self._key_path+FN_SK) or \
+                not os.path.exists(self._key_path+FN_ENC) or \
+                 not os.path.exists(self._key_path+FN_MUL)):
+                load_sk = False
             if load_sk:
                 print("Loading a secret key from: ", self._key_path+FN_SK, flush=True)
                 self.sk = he.SecretKey(self._key_path+FN_SK)
